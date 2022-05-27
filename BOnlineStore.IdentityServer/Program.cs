@@ -1,4 +1,8 @@
 ﻿using BOnlineStore.IdentityServer;
+using BOnlineStore.IdentityServer.Data;
+using BOnlineStore.IdentityServer.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -14,21 +18,41 @@ try
     builder.Host.UseSerilog((ctx, lc) => lc
         .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
         .Enrich.FromLogContext()
-        .ReadFrom.Configuration(ctx.Configuration));
+        .ReadFrom.Configuration(ctx.Configuration));    
 
+    
     var app = builder
         .ConfigureServices()
         .ConfigurePipeline();
 
+    using(var scope = app.Services.CreateScope())
+    {
+        var applicationDbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        applicationDbContext.Database.Migrate();
+
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+        
+        if (!userManager.Users.Any())
+        {
+            userManager.CreateAsync(new ApplicationUser
+            {
+                UserName = "administrator",
+                Email = "scakir1978@hotmail.com",
+                TenantId = new Guid()
+            },"Scag185489*");
+        }
+
+    }    
+
     // this seeding is only for the template to bootstrap the DB and users.
     // in production you will likely want a different approach.
-    if (args.Contains("/seed"))
+    /*if (args.Contains("/seed"))
     {
         Log.Information("Seeding database...");
         SeedData.EnsureSeedData(app);
         Log.Information("Done seeding database. Exiting.");
         return;
-    }
+    }*/
 
     app.Run();
 }
