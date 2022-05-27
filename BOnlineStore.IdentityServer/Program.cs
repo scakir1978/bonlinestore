@@ -38,8 +38,8 @@ try
             {
                 UserName = "administrator",
                 Email = "scakir1978@hotmail.com",
-                TenantId = new Guid()
-            },"Scag185489*");
+                TenantId = Guid.NewGuid(),
+            },"Scag185489*").Wait();
         }
 
     }    
