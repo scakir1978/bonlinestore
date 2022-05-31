@@ -4,6 +4,8 @@ using BOnlineStore.IdentityServer.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using Duende.IdentityServer.Services;
+using BOnlineStore.IdentityServer.Business;
 
 namespace BOnlineStore.IdentityServer;
 
@@ -31,10 +33,14 @@ internal static class HostingExtensions
                 // see https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/
                 options.EmitStaticAudienceClaim = true;
             })
-            .AddInMemoryIdentityResources(Config.IdentityResources)
+            .AddInMemoryIdentityResources(Config.IdentityResources)            
             .AddInMemoryApiScopes(Config.ApiScopes)
             .AddInMemoryClients(Config.Clients)
-            .AddAspNetIdentity<ApplicationUser>();
+            .AddInMemoryApiResources(Config.ApiResources)
+            .AddDeveloperSigningCredential()
+            .AddProfileService<ProfileService>()
+            .AddAspNetIdentity<ApplicationUser>();        
+        
         
         builder.Services.AddAuthentication()
             .AddGoogle(options =>
@@ -46,7 +52,7 @@ internal static class HostingExtensions
                 // set the redirect URI to https://localhost:5001/signin-google
                 options.ClientId = "copy client ID from Google here";
                 options.ClientSecret = "copy client secret from Google here";
-            });
+            });        
 
         return builder.Build();
     }
