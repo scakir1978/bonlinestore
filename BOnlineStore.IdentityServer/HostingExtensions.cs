@@ -22,6 +22,8 @@ internal static class HostingExtensions
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
+        var assemblyName = typeof(Program).Assembly.GetName().Name;
+
         builder.Services
             .AddIdentityServer(options =>
             {
@@ -33,12 +35,36 @@ internal static class HostingExtensions
                 // see https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/
                 options.EmitStaticAudienceClaim = true;
             })
+            /*.AddConfigurationStore(options =>
+            {
+                options.ConfigureDbContext = c =>
+                {
+                    c.UseSqlServer
+                    (
+                        builder.Configuration.GetConnectionString("DefaultConnection"), 
+                        sqloptions => sqloptions.MigrationsAssembly(assemblyName)
+                    );
+                };                
+                
+            })
+            .AddOperationalStore(options =>
+            {
+                options.ConfigureDbContext = c =>
+                {
+                    c.UseSqlServer
+                    (
+                        builder.Configuration.GetConnectionString("DefaultConnection"),
+                        sqloptions => sqloptions.MigrationsAssembly(assemblyName)
+                    );
+                };
+
+            })*/
             .AddInMemoryIdentityResources(Config.IdentityResources)            
             .AddInMemoryApiScopes(Config.ApiScopes)
             .AddInMemoryClients(Config.Clients)
             .AddInMemoryApiResources(Config.ApiResources)
             .AddDeveloperSigningCredential()
-            .AddProfileService<ProfileService>()
+            //.AddProfileService<ProfileService>()
             .AddAspNetIdentity<ApplicationUser>();        
         
         

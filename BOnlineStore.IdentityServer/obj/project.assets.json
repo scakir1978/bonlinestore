@@ -2,6 +2,18 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "AutoMapper/11.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/AutoMapper.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/AutoMapper.dll": {}
+        }
+      },
       "Duende.IdentityServer/6.1.0": {
         "type": "package",
         "dependencies": {
@@ -32,6 +44,33 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "Duende.IdentityServer.EntityFramework/6.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Duende.IdentityServer": "6.1.0",
+          "Duende.IdentityServer.EntityFramework.Storage": "6.1.0"
+        },
+        "compile": {
+          "lib/net6.0/Duende.IdentityServer.EntityFramework.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Duende.IdentityServer.EntityFramework.dll": {}
+        }
+      },
+      "Duende.IdentityServer.EntityFramework.Storage/6.1.0": {
+        "type": "package",
+        "dependencies": {
+          "AutoMapper": "[11.0.0, 12.0.0)",
+          "Duende.IdentityServer.Storage": "6.1.0",
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/Duende.IdentityServer.EntityFramework.Storage.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Duende.IdentityServer.EntityFramework.Storage.dll": {}
+        }
       },
       "Duende.IdentityServer.Storage/6.1.0": {
         "type": "package",
@@ -172,7 +211,7 @@
           "buildMultiTargeting/Microsoft.AspNetCore.Identity.UI.targets": {}
         }
       },
-      "Microsoft.CSharp/4.5.0": {
+      "Microsoft.CSharp/4.7.0": {
         "type": "package",
         "compile": {
           "ref/netcoreapp2.0/_._": {}
@@ -1249,10 +1288,35 @@
             "rid": "win"
           }
         }
+      },
+      "BOnlineStore.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/BOnlineStore.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BOnlineStore.Shared.dll": {}
+        }
       }
     }
   },
   "libraries": {
+    "AutoMapper/11.0.0": {
+      "sha512": "+596AnKykYCk9RxXCEF4GYuapSebQtFVvIA1oVG1rrRkCLAC7AkWehJ0brCfYUbdDW3v1H/p0W3hob7JoXGjMw==",
+      "type": "package",
+      "path": "automapper/11.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "automapper.11.0.0.nupkg.sha512",
+        "automapper.nuspec",
+        "icon.png",
+        "lib/netstandard2.1/AutoMapper.dll",
+        "lib/netstandard2.1/AutoMapper.xml"
+      ]
+    },
     "Duende.IdentityServer/6.1.0": {
       "sha512": "sNS/j4LejNf60N2VtEOyuRVn/V2an9JIx7Pu19N+S5MLLgVClhKeOzp/5ylglkB9lsklX/P86Usn1Nk9Ggb2Eg==",
       "type": "package",
@@ -1281,6 +1345,36 @@
         "icon.png",
         "lib/net6.0/Duende.IdentityServer.AspNetIdentity.dll",
         "lib/net6.0/Duende.IdentityServer.AspNetIdentity.xml"
+      ]
+    },
+    "Duende.IdentityServer.EntityFramework/6.1.0": {
+      "sha512": "5L9+NoQZ2Wxv2mi8e37BbyaQ+6Ye0YQTnKGceUn7in7pPjXlR9hQB9nZkqB3fODGJK9bD+qQpd1Rqu8b1jRjgA==",
+      "type": "package",
+      "path": "duende.identityserver.entityframework/6.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "duende.identityserver.entityframework.6.1.0.nupkg.sha512",
+        "duende.identityserver.entityframework.nuspec",
+        "icon.png",
+        "lib/net6.0/Duende.IdentityServer.EntityFramework.dll",
+        "lib/net6.0/Duende.IdentityServer.EntityFramework.xml"
+      ]
+    },
+    "Duende.IdentityServer.EntityFramework.Storage/6.1.0": {
+      "sha512": "PrtJ2Np44aLV0dqzAShC9gegQDMoD5f4pDQwhDIRFJwRDjI6McDkIZJyY4KlFiCkA2rk3VSQr4qC+2p3mOv/eg==",
+      "type": "package",
+      "path": "duende.identityserver.entityframework.storage/6.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "duende.identityserver.entityframework.storage.6.1.0.nupkg.sha512",
+        "duende.identityserver.entityframework.storage.nuspec",
+        "icon.png",
+        "lib/net6.0/Duende.IdentityServer.EntityFramework.Storage.dll",
+        "lib/net6.0/Duende.IdentityServer.EntityFramework.Storage.xml"
       ]
     },
     "Duende.IdentityServer.Storage/6.1.0": {
@@ -1576,10 +1670,10 @@
         "staticwebassets/V5/lib/jquery/dist/jquery.min.map"
       ]
     },
-    "Microsoft.CSharp/4.5.0": {
-      "sha512": "kaj6Wb4qoMuH3HySFJhxwQfe8R/sJsNJnANrvv8WdFPMoNbKY5htfNscv+LHCu5ipz+49m2e+WQXpLXr9XYemQ==",
+    "Microsoft.CSharp/4.7.0": {
+      "sha512": "pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
       "type": "package",
-      "path": "microsoft.csharp/4.5.0",
+      "path": "microsoft.csharp/4.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1592,6 +1686,7 @@
         "lib/netcoreapp2.0/_._",
         "lib/netstandard1.3/Microsoft.CSharp.dll",
         "lib/netstandard2.0/Microsoft.CSharp.dll",
+        "lib/netstandard2.0/Microsoft.CSharp.xml",
         "lib/portable-net45+win8+wp8+wpa81/_._",
         "lib/uap10.0.16299/_._",
         "lib/win8/_._",
@@ -1601,7 +1696,7 @@
         "lib/xamarinmac20/_._",
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
-        "microsoft.csharp.4.5.0.nupkg.sha512",
+        "microsoft.csharp.4.7.0.nupkg.sha512",
         "microsoft.csharp.nuspec",
         "ref/MonoAndroid10/_._",
         "ref/MonoTouch10/_._",
@@ -3375,11 +3470,18 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "BOnlineStore.Shared/1.0.0": {
+      "type": "project",
+      "path": "../Shared/BOnlineStore.Shared/BOnlineStore.Shared.csproj",
+      "msbuildProject": "../Shared/BOnlineStore.Shared/BOnlineStore.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "BOnlineStore.Shared >= 1.0.0",
       "Duende.IdentityServer.AspNetIdentity >= 6.1.0",
+      "Duende.IdentityServer.EntityFramework >= 6.1.0",
       "Microsoft.AspNetCore.Authentication.Google >= 6.0.5",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 6.0.5",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.5",
@@ -3421,7 +3523,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "F:\\Sources\\BOnlineStore\\Shared\\BOnlineStore.Shared\\BOnlineStore.Shared.csproj": {
+              "projectPath": "F:\\Sources\\BOnlineStore\\Shared\\BOnlineStore.Shared\\BOnlineStore.Shared.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -3435,6 +3541,10 @@
         "targetAlias": "net6.0",
         "dependencies": {
           "Duende.IdentityServer.AspNetIdentity": {
+            "target": "Package",
+            "version": "[6.1.0, )"
+          },
+          "Duende.IdentityServer.EntityFramework": {
             "target": "Package",
             "version": "[6.1.0, )"
           },

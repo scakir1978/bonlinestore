@@ -1,4 +1,5 @@
-﻿using Duende.IdentityServer;
+﻿using BOnlineStore.Shared;
+using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
 
 namespace BOnlineStore.IdentityServer;
@@ -7,7 +8,7 @@ public static class Config
 {
     public static IEnumerable<ApiResource> ApiResources => new ApiResource[]
     {
-        new ApiResource(Constants.ApiResourcesDefinitions){Scopes={Constants.ApiScopesDefinitionsFullPermission}},
+        new ApiResource(BOnlineStoreIdentityServerConstants.ApiResourcesDefinitions){Scopes={ BOnlineStoreIdentityServerConstants.ApiScopesDefinitionsFullPermission}},
         new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
     };
 
@@ -17,16 +18,15 @@ public static class Config
             new IdentityResources.OpenId(),
             new IdentityResources.Profile(),
             new IdentityResources.Email(),
-            /*new IdentityResource(){Name=Constants.ApiScopesDefinitionsTenantId, DisplayName="Tenant Id", 
-                UserClaims = new[]{Constants.ApiScopesDefinitionsTenantId}}*/
+            new IdentityResource(){Name=BOnlineStoreIdentityServerConstants.ApiScopesDefinitionsTenantId, DisplayName="Tenant Id",
+                UserClaims = new[]{ BOnlineStoreIdentityServerConstants.ApiScopesDefinitionsTenantId}}
         };
 
     public static IEnumerable<ApiScope> ApiScopes =>
         new ApiScope[]
         {
-            new ApiScope(Constants.ApiScopesDefinitionsFullPermission),
+            new ApiScope(BOnlineStoreIdentityServerConstants.ApiScopesDefinitionsFullPermission),
             new ApiScope(IdentityServerConstants.LocalApi.ScopeName),
-            new ApiScope(Constants.ApiScopesDefinitionsTenantId)
         };
 
     public static IEnumerable<Client> Clients =>
@@ -36,14 +36,24 @@ public static class Config
             {
                 ClientId = "AngularClient",
                 ClientName = "Angular Client",
-                AllowedGrantTypes = GrantTypes.ClientCredentials,            
-                ClientSecrets = { new Secret("secret".Sha256()) },
-                RequireConsent = false,
+                RequireClientSecret = false,
+                AllowedGrantTypes = GrantTypes.Code,
+                RedirectUris = { "http://localhost:4200/callback" },
+                AllowedCorsOrigins={ "http://localhost:4200" },
+                PostLogoutRedirectUris = { "http://localhost:4200/callout" },
+                AllowedScopes =
+                {
+                    BOnlineStoreIdentityServerConstants.ApiScopesDefinitionsTenantId, 
+                    BOnlineStoreIdentityServerConstants.ApiScopesDefinitionsFullPermission, 
+                    IdentityServerConstants.LocalApi.ScopeName,
+                    IdentityServerConstants.StandardScopes.OpenId, 
+                    IdentityServerConstants.StandardScopes.Profile,
+                    IdentityServerConstants.StandardScopes.OfflineAccess
+                },
                 AllowOfflineAccess = true,
-                AlwaysSendClientClaims = true,
-                AlwaysIncludeUserClaimsInIdToken = true,
-                AllowedScopes = { Constants.ApiScopesDefinitionsTenantId, Constants.ApiScopesDefinitionsFullPermission, IdentityServerConstants.LocalApi.ScopeName }
+                AccessTokenLifetime = ((60 * 60) * 6), // 6 saat
+                RefreshTokenUsage = TokenUsage.OneTimeOnly,
+                AbsoluteRefreshTokenLifetime = (((60 * 60) * 24) * 5 ) //5 gün
             }
-            
         };
 }

@@ -1,0 +1,12 @@
+F:\Sources\BOnlineStore\Shared\BOnlineStore.Shared\bin\Debug\net6.0\BOnlineStore.Shared.deps.json
+F:\Sources\BOnlineStore\Shared\BOnlineStore.Shared\bin\Debug\net6.0\BOnlineStore.Shared.dll
+F:\Sources\BOnlineStore\Shared\BOnlineStore.Shared\bin\Debug\net6.0\BOnlineStore.Shared.pdb
+F:\Sources\BOnlineStore\Shared\BOnlineStore.Shared\obj\Debug\net6.0\BOnlineStore.Shared.csproj.AssemblyReference.cache
+F:\Sources\BOnlineStore\Shared\BOnlineStore.Shared\obj\Debug\net6.0\BOnlineStore.Shared.GeneratedMSBuildEditorConfig.editorconfig
+F:\Sources\BOnlineStore\Shared\BOnlineStore.Shared\obj\Debug\net6.0\BOnlineStore.Shared.AssemblyInfoInputs.cache
+F:\Sources\BOnlineStore\Shared\BOnlineStore.Shared\obj\Debug\net6.0\BOnlineStore.Shared.AssemblyInfo.cs
+F:\Sources\BOnlineStore\Shared\BOnlineStore.Shared\obj\Debug\net6.0\BOnlineStore.Shared.csproj.CoreCompileInputs.cache
+F:\Sources\BOnlineStore\Shared\BOnlineStore.Shared\obj\Debug\net6.0\BOnlineStore.Shared.dll
+F:\Sources\BOnlineStore\Shared\BOnlineStore.Shared\obj\Debug\net6.0\refint\BOnlineStore.Shared.dll
+F:\Sources\BOnlineStore\Shared\BOnlineStore.Shared\obj\Debug\net6.0\BOnlineStore.Shared.pdb
+F:\Sources\BOnlineStore\Shared\BOnlineStore.Shared\obj\Debug\net6.0\ref\BOnlineStore.Shared.dll

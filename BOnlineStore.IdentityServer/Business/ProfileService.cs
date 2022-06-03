@@ -1,4 +1,5 @@
 ﻿using BOnlineStore.IdentityServer.Models;
+using BOnlineStore.Shared;
 using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
@@ -24,7 +25,7 @@ namespace BOnlineStore.IdentityServer.Business
 
 		    var claims = new List<Claim>
 		    {
-			    new Claim(Constants.ApiScopesDefinitionsTenantId, user.TenantId.ToString()),			    
+			    new Claim(BOnlineStoreIdentityServerConstants.ApiScopesDefinitionsTenantId, user.TenantId.ToString()),			    
 		    };
 
 		    context.IssuedClaims.AddRange(claims);

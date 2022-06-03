@@ -102,3 +102,8 @@ F:\Sources\BOnlineStore\BOnlineStore.IdentityServer\bin\Debug\net6.0\runtimes\wi
 F:\Sources\BOnlineStore\BOnlineStore.IdentityServer\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 F:\Sources\BOnlineStore\BOnlineStore.IdentityServer\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 F:\Sources\BOnlineStore\BOnlineStore.IdentityServer\bin\Debug\net6.0\keys\is-signing-key-C3E9B3D0BFC66B3F204CAE559E8E3499.json
+F:\Sources\BOnlineStore\BOnlineStore.IdentityServer\bin\Debug\net6.0\AutoMapper.dll
+F:\Sources\BOnlineStore\BOnlineStore.IdentityServer\bin\Debug\net6.0\Duende.IdentityServer.EntityFramework.dll
+F:\Sources\BOnlineStore\BOnlineStore.IdentityServer\bin\Debug\net6.0\Duende.IdentityServer.EntityFramework.Storage.dll
+F:\Sources\BOnlineStore\BOnlineStore.IdentityServer\bin\Debug\net6.0\BOnlineStore.Shared.dll
+F:\Sources\BOnlineStore\BOnlineStore.IdentityServer\bin\Debug\net6.0\BOnlineStore.Shared.pdb

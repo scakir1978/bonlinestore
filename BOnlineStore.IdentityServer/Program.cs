@@ -25,7 +25,11 @@ try
         .ConfigureServices()
         .ConfigurePipeline();
 
-    using(var scope = app.Services.CreateScope())
+    Log.Information("Seeding database...");
+    SeedData.EnsureSeedData(app);
+    Log.Information("Done seeding database. Exiting.");
+
+    /*using(var scope = app.Services.CreateScope())
     {
         var applicationDbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
         applicationDbContext.Database.Migrate();
@@ -42,7 +46,7 @@ try
             },"Scag185489*").Wait();
         }
 
-    }    
+    } */
 
     // this seeding is only for the template to bootstrap the DB and users.
     // in production you will likely want a different approach.

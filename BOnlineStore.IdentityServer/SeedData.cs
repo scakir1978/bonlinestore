@@ -5,6 +5,9 @@ using BOnlineStore.IdentityServer.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using Duende.IdentityServer.EntityFramework.DbContexts;
+using Duende.IdentityServer.EntityFramework.Mappers;
+using BOnlineStore.Shared;
 
 namespace BOnlineStore.IdentityServer;
 
@@ -14,73 +17,57 @@ public class SeedData
     {
         using (var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
         {
+            #region ConfigurationDbContext ile ilgili kayıtlar eklenir.
+
+            /*var configrationDbContext = scope.ServiceProvider.GetService<ConfigurationDbContext>();
+            configrationDbContext.Database.Migrate();
+
+            foreach (var client in Config.Clients)
+            {
+                configrationDbContext.Clients.Add(client.ToEntity());
+            }*/
+            
+
+            #endregion
+
+
+
+            #region ApplicationDbContext ile ilgili kayıtlar eklenir
+
             var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
             context.Database.Migrate();
 
             var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-            var alice = userMgr.FindByNameAsync("alice").Result;
-            if (alice == null)
+
+            if (!userMgr.Users.Any())
             {
-                alice = new ApplicationUser
+                var defaultTenantId = Guid.NewGuid();
+
+                var adminUser = new ApplicationUser
                 {
-                    UserName = "alice",
-                    Email = "AliceSmith@email.com",
-                    EmailConfirmed = true,
+                    UserName = "administrator",
+                    Email = "scakir1978@hotmail.com",
+                    TenantId = defaultTenantId
                 };
-                var result = userMgr.CreateAsync(alice, "Pass123$").Result;
+
+                var result = userMgr.CreateAsync(adminUser, "Scag185489*").Result;
+
                 if (!result.Succeeded)
                 {
                     throw new Exception(result.Errors.First().Description);
                 }
 
-                result = userMgr.AddClaimsAsync(alice, new Claim[]{
-                            new Claim(JwtClaimTypes.Name, "Alice Smith"),
-                            new Claim(JwtClaimTypes.GivenName, "Alice"),
-                            new Claim(JwtClaimTypes.FamilyName, "Smith"),
-                            new Claim(JwtClaimTypes.WebSite, "http://alice.com"),
+                result = userMgr.AddClaimsAsync(adminUser, new Claim[]{
+                            new Claim(BOnlineStoreIdentityServerConstants.ApiScopesDefinitionsTenantId, defaultTenantId.ToString()),
                         }).Result;
                 if (!result.Succeeded)
                 {
                     throw new Exception(result.Errors.First().Description);
                 }
-                Log.Debug("alice created");
-            }
-            else
-            {
-                Log.Debug("alice already exists");
-            }
 
-            var bob = userMgr.FindByNameAsync("bob").Result;
-            if (bob == null)
-            {
-                bob = new ApplicationUser
-                {
-                    UserName = "bob",
-                    Email = "BobSmith@email.com",
-                    EmailConfirmed = true
-                };
-                var result = userMgr.CreateAsync(bob, "Pass123$").Result;
-                if (!result.Succeeded)
-                {
-                    throw new Exception(result.Errors.First().Description);
-                }
+                Log.Debug("administrator created");
 
-                result = userMgr.AddClaimsAsync(bob, new Claim[]{
-                            new Claim(JwtClaimTypes.Name, "Bob Smith"),
-                            new Claim(JwtClaimTypes.GivenName, "Bob"),
-                            new Claim(JwtClaimTypes.FamilyName, "Smith"),
-                            new Claim(JwtClaimTypes.WebSite, "http://bob.com"),
-                            new Claim("location", "somewhere")
-                        }).Result;
-                if (!result.Succeeded)
-                {
-                    throw new Exception(result.Errors.First().Description);
-                }
-                Log.Debug("bob created");
-            }
-            else
-            {
-                Log.Debug("bob already exists");
+                #endregion
             }
         }
     }

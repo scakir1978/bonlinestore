@@ -1,6 +1,6 @@
-﻿namespace BOnlineStore.IdentityServer
+﻿namespace BOnlineStore.Shared
 {
-    public class Constants
+    public class BOnlineStoreIdentityServerConstants
     {
         #region Api Resources Constants
 
@@ -14,6 +14,5 @@
         public const string ApiScopesDefinitionsTenantId = "tenantId";
 
         #endregion
-
     }
 }
