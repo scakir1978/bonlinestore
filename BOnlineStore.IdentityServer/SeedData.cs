@@ -30,8 +30,6 @@ public class SeedData
 
             #endregion
 
-
-
             #region ApplicationDbContext ile ilgili kayıtlar eklenir
 
             var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
@@ -57,17 +55,18 @@ public class SeedData
                     throw new Exception(result.Errors.First().Description);
                 }
 
-                result = userMgr.AddClaimsAsync(adminUser, new Claim[]{
+                /*result = userMgr.AddClaimsAsync(adminUser, new Claim[]{
                             new Claim(BOnlineStoreIdentityServerConstants.ApiScopesDefinitionsTenantId, defaultTenantId.ToString()),
                         }).Result;
                 if (!result.Succeeded)
                 {
                     throw new Exception(result.Errors.First().Description);
-                }
+                }*/
 
                 Log.Debug("administrator created");
 
                 #endregion
+
             }
         }
     }

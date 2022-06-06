@@ -11,7 +11,7 @@ namespace BOnlineStore.Services.Definitions.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok("Başarılı");
+            return Ok(User.Claims.FirstOrDefault(x=>x.Type== "tenantId").Value);
         }
 
     }

@@ -29,13 +29,17 @@ namespace BOnlineStore.IdentityServer.Business
 		    };
 
 		    context.IssuedClaims.AddRange(claims);
+            
         }
 
         public async Task IsActiveAsync(IsActiveContext context)
         {
             var sub = context.Subject.GetSubjectId();
+
             var user = await _userManager.FindByIdAsync(sub);
+
             context.IsActive = user != null;
+            
         }
     }
 }

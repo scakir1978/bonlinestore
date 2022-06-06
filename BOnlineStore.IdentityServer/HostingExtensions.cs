@@ -19,8 +19,7 @@ internal static class HostingExtensions
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
         builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-            .AddEntityFrameworkStores<ApplicationDbContext>()
-            .AddDefaultTokenProviders();
+            .AddEntityFrameworkStores<ApplicationDbContext>();
 
         var assemblyName = typeof(Program).Assembly.GetName().Name;
 
@@ -63,11 +62,10 @@ internal static class HostingExtensions
             .AddInMemoryApiScopes(Config.ApiScopes)
             .AddInMemoryClients(Config.Clients)
             .AddInMemoryApiResources(Config.ApiResources)
-            .AddDeveloperSigningCredential()
-            //.AddProfileService<ProfileService>()
-            .AddAspNetIdentity<ApplicationUser>();        
-        
-        
+            .AddDeveloperSigningCredential()            
+            .AddAspNetIdentity<ApplicationUser>()
+            .AddProfileService<ProfileService>();
+
         builder.Services.AddAuthentication()
             .AddGoogle(options =>
             {

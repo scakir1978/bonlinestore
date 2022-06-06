@@ -8,7 +8,7 @@ public static class Config
 {
     public static IEnumerable<ApiResource> ApiResources => new ApiResource[]
     {
-        new ApiResource(BOnlineStoreIdentityServerConstants.ApiResourcesDefinitions){Scopes={ BOnlineStoreIdentityServerConstants.ApiScopesDefinitionsFullPermission}},
+        new ApiResource(BOnlineStoreIdentityServerConstants.ApiResourcesDefinitions){Scopes={ BOnlineStoreIdentityServerConstants.ApiScopesDefinitionsFullPermission}},        
         new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
     };
 
@@ -18,8 +18,6 @@ public static class Config
             new IdentityResources.OpenId(),
             new IdentityResources.Profile(),
             new IdentityResources.Email(),
-            new IdentityResource(){Name=BOnlineStoreIdentityServerConstants.ApiScopesDefinitionsTenantId, DisplayName="Tenant Id",
-                UserClaims = new[]{ BOnlineStoreIdentityServerConstants.ApiScopesDefinitionsTenantId}}
         };
 
     public static IEnumerable<ApiScope> ApiScopes =>
@@ -41,9 +39,10 @@ public static class Config
                 RedirectUris = { "http://localhost:4200/callback" },
                 AllowedCorsOrigins={ "http://localhost:4200" },
                 PostLogoutRedirectUris = { "http://localhost:4200/callout" },
+                FrontChannelLogoutUri = "http://localhost:4200/callout",
                 AllowedScopes =
                 {
-                    BOnlineStoreIdentityServerConstants.ApiScopesDefinitionsTenantId, 
+                    //BOnlineStoreIdentityServerConstants.ApiScopesDefinitionsTenantId, 
                     BOnlineStoreIdentityServerConstants.ApiScopesDefinitionsFullPermission, 
                     IdentityServerConstants.LocalApi.ScopeName,
                     IdentityServerConstants.StandardScopes.OpenId, 
@@ -53,7 +52,7 @@ public static class Config
                 AllowOfflineAccess = true,
                 AccessTokenLifetime = ((60 * 60) * 6), // 6 saat
                 RefreshTokenUsage = TokenUsage.OneTimeOnly,
-                AbsoluteRefreshTokenLifetime = (((60 * 60) * 24) * 5 ) //5 gün
+                AbsoluteRefreshTokenLifetime = (((60 * 60) * 24) * 5 ), //5 gün                
             }
         };
 }
