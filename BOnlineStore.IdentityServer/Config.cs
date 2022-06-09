@@ -36,7 +36,7 @@ public static class Config
                 ClientName = "Angular Client",
                 RequireClientSecret = false,
                 AllowedGrantTypes = GrantTypes.Code,
-                RedirectUris = { "http://localhost:4200/callback" },
+                RedirectUris = { "http://localhost:4200/callback", "http://localhost:4200/silent" },
                 AllowedCorsOrigins={ "http://localhost:4200" },
                 PostLogoutRedirectUris = { "http://localhost:4200/callout" },
                 FrontChannelLogoutUri = "http://localhost:4200/callout",
@@ -51,7 +51,7 @@ public static class Config
                 },
                 AllowOfflineAccess = true,
                 AccessTokenLifetime = ((60 * 60) * 6), // 6 saat
-                RefreshTokenUsage = TokenUsage.OneTimeOnly,
+                RefreshTokenUsage = TokenUsage.ReUse,
                 AbsoluteRefreshTokenLifetime = (((60 * 60) * 24) * 5 ), //5 gün                
             }
         };
